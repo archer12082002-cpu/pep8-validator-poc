@@ -1,0 +1,26 @@
+name: PEP8 Validation
+
+on:
+  push:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          pip install flake8 pandas openpyxl
+
+      - name: Run Validation
+        run: |
+          python generate_report.py
+
+      - name: Upload Excel Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: PEP8_Report
+          path: pep8_report.xlsx
