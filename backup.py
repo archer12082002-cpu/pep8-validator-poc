@@ -22,6 +22,7 @@ _C_STD_INT_TYPES = {
 _NO_RETURN_CHECK = "__NO_RETURN_CHECK__"
 #Dummy comment to check devops
 xx = 1+2
+xy = 2+3
 def _normalize_c_type(t: str) -> str:
     t = (t or "").strip()
     t = re.sub(r"\s+", " ", t)
