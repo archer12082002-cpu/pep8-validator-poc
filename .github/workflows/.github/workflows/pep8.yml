@@ -13,14 +13,18 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install flake8 pandas openpyxl
+          pip install pylint pandas openpyxl
 
       - name: Run Validation
         run: |
           python generate_report.py
 
+      - name: Read Report Name
+        run: |
+          echo "REPORT_FILE=$(cat report_name.txt)" >> $GITHUB_ENV
+
       - name: Upload Excel Report
         uses: actions/upload-artifact@v4
         with:
-          name: PEP8_Report
-          path: pep8_report.xlsx
+          name: PEP8_Reports
+          path: ${{ env.REPORT_FILE }}

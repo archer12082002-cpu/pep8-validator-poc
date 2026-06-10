@@ -1,8 +1,10 @@
 import subprocess
 import pandas as pd
 
+file_to_check = "backup.py"
+
 result = subprocess.run(
-    ["python", "-m", "flake8", "."],
+    ["python", "-m", "pylint", file_to_check],
     capture_output=True,
     text=True
 )
@@ -21,9 +23,14 @@ if not violations:
 
 df = pd.DataFrame(violations)
 
+report_name = file_to_check.split(".")[0] + "_report.xlsx"
+
 df.to_excel(
-    "pep8_report.xlsx",
+    report_name,
     index=False
 )
 
+with open("report_name.txt", "w") as f:
+    f.write(report_name)
+    
 print("PEP8 report generated successfully")
